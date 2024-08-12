@@ -5,6 +5,7 @@ import Searchbar from './Searchbar';
 import Wrapper from './Wrapper';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import Deletebox from './Deletebox';
 
 enum Status {
   Interested = 'Interested',
@@ -60,6 +61,34 @@ const Inbox = ({ setCurrentThread, isDarkMode }: { setCurrentThread: (threadId: 
     }
   };
 
+
+
+
+  const [isReplyVisible, setIsReplyVisible] = useState(false);
+
+  const handleReplyClick = () => {
+    setIsReplyVisible((prev) => !prev);
+  };
+    const handleKeyDown = (event: KeyboardEvent) => {
+        console.log("Hello")
+        if (event.key === 'd' || event.key === 'D') {
+            console.log("Hello World")
+          event.preventDefault();
+          handleReplyClick();
+        }
+      };
+      useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown);
+    
+        return () => {
+          window.removeEventListener('keydown', handleKeyDown);
+        };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, []);
+
+
+
+
   return (
     <div className={`h-full ${isDarkMode ? 'bg-[#000000]' : 'bg-white'}`}>
       <div className='w-full flex justify-between items-center p-2'>
@@ -86,6 +115,7 @@ const Inbox = ({ setCurrentThread, isDarkMode }: { setCurrentThread: (threadId: 
           </div>
         ))}
       </div>
+      {isReplyVisible? <div className='absolute top-0 left-[30%]'><Deletebox/></div>:<div></div>}
     </div>
   );
 }

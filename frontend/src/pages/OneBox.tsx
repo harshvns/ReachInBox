@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import EmptyScreen from '../components/EmptyScreen';
 import Inbox from '../components/Inbox';
 import EmailComponent from '../components/Email';
+import Deletebox from '../components/Deletebox';
 
 const OneBox = () => {
   const [currentThread, setCurrentThread] = useState('');
@@ -20,6 +21,10 @@ const OneBox = () => {
     }
   }, [isDarkMode]);
 
+
+
+
+  
   return (
     <div className={`flex h-screen w-screen overflow-hidden ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
       <div className="w-[56px]">
@@ -39,6 +44,8 @@ const OneBox = () => {
         </div>
       </div>
     </div>
+
+  
   );
 };
 
